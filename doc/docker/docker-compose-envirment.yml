@@ -1,0 +1,124 @@
+version: '3.9'
+
+services:
+  # 注册中心
+  nacos:
+    image: nacos/nacos-server:v2.0.3
+    container_name: nacos-server
+    environment:
+      - PREFER_HOST_MODE=hostname
+      - MODE=standalone
+    ports:
+      - 8848:8848
+      - 9848:9848
+    volumes:
+      - ./init.d/custom.properties:/home/nacos/init.d/custom.properties
+    restart: always
+  # MySQL 数据库
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: tiktok_mall
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+
+  # Redis 缓存
+  redis:
+    image: redis:6.2
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis/data:/data
+
+  # RabbitMQ 消息队列
+  rabbitmq:
+    image: rabbitmq:3.9-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  # ElasticSearch 搜索引擎
+  elasticsearch:
+    image: elasticsearch:7.17.3
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx1024m
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - ./elasticsearch/data:/usr/share/elasticsearch/data
+
+  # Kibana ElasticSearch的可视化工具
+  kibana:
+    image: kibana:7.17.3
+    container_name: kibana
+    environment:
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+
+  # Prometheus 监控系统
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - D:\Java\tiktok-mall\doc\prometheus\prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+
+  # Grafana 可视化仪表盘
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    volumes:
+      - ./grafana/data:/var/lib/grafana
+    ports:
+      - "3000:3000"
+
+  # Zipkin 链路追踪工具
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - "9411:9411"
+
+  # Sentinel 容错保护工具
+  sentinel-dashboard:
+    image: bladex/sentinel-dashboard:1.8.3
+    container_name: sentinel
+    ports:
+      - "8080:8080"
+
+  redis-admin:
+    image: spryker/redis-commander:0.8.0
+    container_name: redis-admin
+    hostname: redis-commander
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+      - HTTP_USER=admin
+      - HTTP_PASSWORD=admin
+      - LANG=C.UTF-8
+      - LANGUAGE=C.UTF-8
+      - LC_ALL=C.UTF-8
+    networks:
+      - my-network
+    depends_on:
+      redis:
+        condition: service_healthy
+
+networks:
+  my-network:
+    driver: bridge
