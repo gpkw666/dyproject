@@ -11,3 +11,30 @@ spring:
         namespace: public  # 可选，命名空间
       config:
         import-check-enabled: false  # 禁用配置导入检查
+    datasource:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/tiktok_mall
+      username: root
+      password: 123wang
+
+    data:
+      redis:
+        host: 127.0.0.1
+        port: 16379  # Redis端口号
+        password:  # 访问Redis所需密码
+        database: 1 # 使用的数据库编号
+        lettuce:
+          pool:
+            max-active: 8        # 连接池最大连接数(使用负值表示没有限制） 默认8
+            max-wait: -1         # 连接池最大阻塞等待时间（使用负值表示没有限制） 默认-1
+            max-idle: 8          # 连接池最大空闲连接 默认8
+            min-idle: 0          # 连接池最小空闲连接 默认 0
+        timeout: 5000
+
+    mybatis:
+      # mapper配置文件路径
+      mapper-locations: classpath:mapper/*.xml
+      type-aliases-package: com.example.tiktokuser.pojo.entity
+      configuration:
+        # 开启驼峰命名
+        map-underscore-to-camel-case: true

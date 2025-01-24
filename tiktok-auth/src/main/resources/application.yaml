@@ -1,13 +1,13 @@
 server:
-  port: 9091  # ????
+  port: 9091
 spring:
   application:
-    name: tiktok-auth  # ????????? Nacos
+    name: tiktok-auth
 
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848  # Nacos ???????
-        namespace: public  # ???????
+        server-addr: 127.0.0.1:8848
+        namespace: public
       config:
-        import-check-enabled: false  # ????????
+        import-check-enabled: false

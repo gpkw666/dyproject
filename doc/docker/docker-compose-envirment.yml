@@ -99,6 +99,7 @@ services:
     ports:
       - "8080:8080"
 
+  # Redis 可视化工具
   redis-admin:
     image: spryker/redis-commander:0.8.0
     container_name: redis-admin

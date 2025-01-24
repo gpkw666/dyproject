@@ -1,22 +1,23 @@
 server:
-  port: 9092  # 服务端口
+  port: 9099
+
 spring:
   application:
-    name: tiktok-cart  # 服务名，用于注册到 Nacos
+    name: tiktok-user
 
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848  # Nacos 注册中心的地址
-        namespace: public  # 可选，命名空间
+        server-addr: 127.0.0.1:8848
+        namespace: public
       config:
-        import-check-enabled: false  # 禁用配置导入检查
+        import-check-enabled: false
 
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/tiktok_mall
-    username: root
-    password: 123wang
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/tiktok_mall
+      username: root
+      password: 123wang
 
   data:
     redis:
