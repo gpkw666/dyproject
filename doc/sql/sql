@@ -1,9 +1,5 @@
 CREATE TABLE `user` (
   `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `name` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '姓名',
-  `phone` varchar(11) COLLATE utf8_bin DEFAULT NULL COMMENT '手机号',
-  `sex` varchar(2) COLLATE utf8_bin DEFAULT NULL COMMENT '性别',
-  `id_number` varchar(18) COLLATE utf8_bin DEFAULT NULL COMMENT '身份证号',
   `avatar` varchar(500) COLLATE utf8_bin DEFAULT NULL COMMENT '头像',
 	`user_name` varchar(32) CoLLATE utf8_bin DEFAULT NULL COMMENT '用户名',
 	`password` varchar(32) CoLLATE utf8_bin DEFAULT NULL COMMENT '密码',
