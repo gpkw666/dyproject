@@ -1,0 +1,88 @@
+CREATE TABLE `user` (
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `name` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '姓名',
+  `phone` varchar(11) COLLATE utf8_bin DEFAULT NULL COMMENT '手机号',
+  `sex` varchar(2) COLLATE utf8_bin DEFAULT NULL COMMENT '性别',
+  `id_number` varchar(18) COLLATE utf8_bin DEFAULT NULL COMMENT '身份证号',
+  `avatar` varchar(500) COLLATE utf8_bin DEFAULT NULL COMMENT '头像',
+	`user_name` varchar(32) CoLLATE utf8_bin DEFAULT NULL COMMENT '用户名',
+	`password` varchar(32) CoLLATE utf8_bin DEFAULT NULL COMMENT '密码',
+  `create_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin COMMENT='用户信息';
+
+
+CREATE TABLE `shopping_cart` (
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `name` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '商品名称',
+  `image` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '图片',
+  `user_id` bigint NOT NULL COMMENT '主键',
+  `commodity_id` bigint DEFAULT NULL COMMENT '商品id',
+  `style` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '商品款式',
+  `number` int NOT NULL DEFAULT '1' COMMENT '数量',
+  `amount` decimal(10,2) NOT NULL COMMENT '金额',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin COMMENT='购物车';
+
+CREATE TABLE `commodity` (
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `name` varchar(32) COLLATE utf8_bin NOT NULL COMMENT '商品名称',
+  `category_id` bigint NOT NULL COMMENT '商品分类id',
+  `price` decimal(10,2) DEFAULT NULL COMMENT '商品价格',
+  `image` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '图片',
+  `description` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '描述信息',
+  `status` int DEFAULT '1' COMMENT '0 停售 1 起售',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `create_user` bigint DEFAULT NULL COMMENT '创建人',
+  `update_user` bigint DEFAULT NULL COMMENT '修改人',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_dish_name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin COMMENT='商品';
+
+CREATE TABLE `category` (
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `name` varchar(32) COLLATE utf8_bin NOT NULL COMMENT '分类名称',
+  `sort` int NOT NULL DEFAULT '0' COMMENT '顺序',
+  `status` int DEFAULT NULL COMMENT '分类状态 0:禁用，1:启用',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `create_user` bigint DEFAULT NULL COMMENT '创建人',
+  `update_user` bigint DEFAULT NULL COMMENT '修改人',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_category_name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin COMMENT='商品分类';
+
+
+CREATE TABLE `orders` (
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `number` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '订单号',
+  `status` int NOT NULL DEFAULT '1' COMMENT '订单状态 1待付款 2待接单 3已接单 4派送中 5已完成 6已取消 7退款',
+  `user_id` bigint NOT NULL COMMENT '下单用户',
+  `order_time` datetime NOT NULL COMMENT '下单时间',
+  `checkout_time` datetime DEFAULT NULL COMMENT '结账时间',
+  `pay_method` int NOT NULL DEFAULT '1' COMMENT '支付方式 1微信,2支付宝',
+  `pay_status` tinyint NOT NULL DEFAULT '0' COMMENT '支付状态 0未支付 1已支付 2退款',
+  `amount` decimal(10,2) NOT NULL COMMENT '实收金额',
+  `remark` varchar(100) COLLATE utf8_bin DEFAULT NULL COMMENT '备注',
+  `phone` varchar(11) COLLATE utf8_bin DEFAULT NULL COMMENT '手机号',
+  `user_name` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '用户名称',
+  `consignee` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '收货人',
+  `cancel_reason` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '订单取消原因',
+  `rejection_reason` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '订单拒绝原因',
+  `cancel_time` datetime DEFAULT NULL COMMENT '订单取消时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin COMMENT='订单表';
+
+
+CREATE TABLE `order_detail` (
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `name` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '名字',
+  `image` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '图片',
+  `order_id` bigint NOT NULL COMMENT '订单id',
+  `commodity_id` bigint DEFAULT NULL COMMENT '商品id',
+  `number` int NOT NULL DEFAULT '1' COMMENT '数量',
+  `amount` decimal(10,2) NOT NULL COMMENT '金额',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin COMMENT='订单明细表';
