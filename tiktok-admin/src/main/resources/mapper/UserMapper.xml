@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.tiktokadmin.mapper.UserMapper">
+    <select id="pageQuery" resultType="com.example.tiktokadmin.pojo.entity.User">
+        select * from user
+        <where>
+            <if test="user_name != null and userName !=''">
+                and user_name like concat('%',#{userName},'%')
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+
+
+</mapper>
