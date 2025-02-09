@@ -38,4 +38,15 @@ public class UserServiceImpl implements UserService {
 
         return new PageResult(total,records);
     }
+
+    /**
+     * 根据id查询用户信息
+     * @param id
+     * @return
+     */
+    @Override
+    public User getById(Long id) {
+        User user = userMapper.getById(id);
+        return user;
+    }
 }
