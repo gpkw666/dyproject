@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.List;
 
+@SuppressWarnings("ALL")
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {

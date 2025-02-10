@@ -16,6 +16,7 @@ import java.util.List;
 /**
  * 商品服务相关接口
  */
+@SuppressWarnings("ALL")
 @Slf4j
 @RestController
 public class CommodityController {
