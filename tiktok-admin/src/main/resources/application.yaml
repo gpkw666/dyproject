@@ -11,3 +11,16 @@ spring:
         namespace: public
       config:
         import-check-enabled: false
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/tiktok_mall
+    username: root
+    password: 123wang
+
+mybatis:
+  #mapper配置文件
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.tiktokadmin.pojo.entity
+  configuration:
+    #开启驼峰命名
+    map-underscore-to-camel-case: true
