@@ -3,7 +3,6 @@ package com.example.tiktokcommodity.service.impl;
 import com.example.tiktokcommodity.bean.Commodity;
 import com.example.tiktokcommodity.bean.CommodityPreviewVo;
 import com.example.tiktokcommodity.bean.addCommodity;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

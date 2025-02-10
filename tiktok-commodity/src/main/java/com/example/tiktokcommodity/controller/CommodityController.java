@@ -5,13 +5,11 @@ import com.example.tiktokcommodity.Result.Result;
 import com.example.tiktokcommodity.bean.Commodity;
 import com.example.tiktokcommodity.bean.CommodityPreviewVo;
 import com.example.tiktokcommodity.bean.addCommodity;
+import com.example.tiktokcommodity.service.impl.testService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.web.bind.annotation.*;
-import com.example.tiktokcommodity.service.impl.testService;
-
 
 import java.util.List;
 

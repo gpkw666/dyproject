@@ -5,7 +5,6 @@ import com.example.tiktokcommodity.bean.CommodityPreviewVo;
 import com.example.tiktokcommodity.bean.addCommodity;
 import com.example.tiktokcommodity.mapper.ComMapper;
 import com.example.tiktokcommodity.service.impl.testService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
